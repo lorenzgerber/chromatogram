@@ -57,7 +57,7 @@ calculate_tic <- function(data_array, sgolay_order = NULL, sgolay_length = 3){
   permuted <- matrix(data_array, nrow = dim(data_array)[1], ncol = dim(data_array)[2] * dim(data_array)[3])
   tic <- apply(permuted,1,sum)/dim(data_array)[3]
   if(!is.null(sgolay_order)){
-    tic <- signal::sgolayfilt(chromatogram::calculate_tic(test_data),p = sgolay_order, n = sgolay_length )
+    tic <- signal::sgolayfilt(tic, p = sgolay_order, n = sgolay_length )
   }
   return (tic)
 }
