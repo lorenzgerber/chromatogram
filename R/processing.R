@@ -54,10 +54,13 @@ extract_scan_range <- function(data_array, start_scan, end_scan){
 #' @export
 calculate_tic <- function(data_array, sgolay_order = NULL, sgolay_length = 3){
 
+
   permuted <- matrix(data_array, nrow = dim(data_array)[1], ncol = dim(data_array)[2] * dim(data_array)[3])
   tic <- apply(permuted,1,sum)/dim(data_array)[3]
   if(!is.null(sgolay_order)){
     tic <- signal::sgolayfilt(tic, p = sgolay_order, n = sgolay_length )
   }
+  names(tic) <- rownames(data_array)
+
   return (tic)
 }
